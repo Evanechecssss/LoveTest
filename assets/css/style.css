@@ -31,14 +31,25 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0;
 }
 
-/*Container*/
-
-.container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+*::selection {
+    color: #c96d6d;
 }
 
-*::selection {
+.main {
     color: #c45656;
+}
+
+
+/* Game elements*/
+.hero___box {
+    position: relative;
+    width: 300px;
+    height: 300px;
+}
+
+.hero {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: url(./assets/images/hero.png) top center no-repeat;
 }

@@ -14,15 +14,53 @@
     <meta property="og:url" content="https://evanechecssss.github.io/LoveTest" />
     <meta property="og:image" content="https://evanechecssss.github.io/assets/images/banner_logo.png" />
     <meta property="og:site_name" content="Oshi" />
+    <link rel="icon" href="./assets/images/icon.png" type="image/png">
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body>
-    Сайт для Оши, чтобы ей было интересно и она улыбнулась)
-    (Первый тест)
     <script type="text/javascript">
+        let hero = document.querySelector('.hero');
+        window.addEventListener('keydown', function (e) {
 
+            console.log('key code - ', e.keyCode);
+            if (e.keyCode == 38) {
+                let goUp = hero.offsetTop;
+                console.log(goUp);
+                ball.style.top = goUp - 40 + "px";
+            }
+            if (e.keyCode == 40) {
+                let goDown = hero.offsetTop
+                ball.style.top = goDown + 40 + "px"
+            }
+            if (e.keyCode == 37) {
+                let goLeft = hero.offsetLeft
+                ball.style.left = goLeft - 40 + "px"
+            }
+            if (e.keyCode == 39) {
+                let goRight = hero.offsetLeft
+                ball.style.left = goRight + 40 + "px"
+            }
+        })
     </script>
+
+    <div class="main">
+
+        <h1>
+            Сайт для Оши, чтобы ей было интересно и она улыбнулась)
+        </h1>
+        <div class="hero___box">
+            <div class="hero">
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
 </body>
 
 </html>
