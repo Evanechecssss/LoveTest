@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru" dir="ltr" prefix="og: http://ogp.me/ns#">
+<html lang="ru" dir="auto" prefix="og: http://ogp.me/ns#">
 
 <head>
     <meta charset="utf-8">
@@ -16,51 +16,25 @@
     <meta property="og:site_name" content="Oshi" />
     <link rel="icon" href="./assets/images/icon.png" type="image/png">
     <link rel="stylesheet" href="./assets/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 </head>
 
 <body>
-    <script type="text/javascript">
-        let hero = document.querySelector('.hero');
-        window.addEventListener('keydown', function (e) {
-
-            console.log('key code - ', e.keyCode);
-            if (e.keyCode == 38) {
-                let goUp = hero.offsetTop;
-                console.log(goUp);
-                ball.style.top = goUp - 40 + "px";
-            }
-            if (e.keyCode == 40) {
-                let goDown = hero.offsetTop
-                ball.style.top = goDown + 40 + "px"
-            }
-            if (e.keyCode == 37) {
-                let goLeft = hero.offsetLeft
-                ball.style.left = goLeft - 40 + "px"
-            }
-            if (e.keyCode == 39) {
-                let goRight = hero.offsetLeft
-                ball.style.left = goRight + 40 + "px"
-            }
-        })
-    </script>
-
     <div class="main">
-
-        <h1>
-            Сайт для Оши, чтобы ей было интересно и она улыбнулась)
-        </h1>
-        <div class="hero___box">
-            <div class="hero">
-
-            </div>
+        <h1 class="title">Сайт для Оши, чтобы ей было интересно и она улыбнулась)</h1>
+        <div class="game">
+            <iframe class="game___frame" id="game" title="Game" width="100%" height="100%"
+                src="http://127.0.0.1:5500/game/level1.html">
+                Ваш браузер не поддерживает плавающие фреймы!
+            </iframe>
         </div>
 
+
+        <!--  
+            src="https://evanechecssss.github.io/LoveTest/game/level1.html">
+            -->
     </div>
-
-
-
-
-
 </body>
 
 </html>
