@@ -21,130 +21,126 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 </head>
-<script type="application/javascript">
-    var yPos = 10;
-    var xPos = 10;
-    var skins = ['./../assets/images/hero/hero', './../assets/images/hero/hero_b', './../assets/images/hero/hero_r', './../assets/images/hero/hero_l']
-    var direction = 0;
-    document.addEventListener('keypress', function (event) {
-        if (event.code == 'KeyS') {
-            moveDown();
-        }
-        else if (event.code == 'KeyW') {
-            moveUp();
-        }
-        else if (event.code == 'KeyA') {
-            moveLeft();
-        }
-        else if (event.code == 'KeyD') {
-            moveRight();
-        } else {
-        }
-    });
 
-    function moveUp() {
-        if (yPos < 0) {
-            return;
-        }
-        if (direction != 1) {
-            direction = 1;
-        }
-        yPos -= 10;
-    }
 
-    function moveDown() {
-        if (yPos > 800) {
-            return;
+<body onload="firstSet()">
+    <div id="hero"></div>
+    <div id="bg"></div>
+
+
+
+    <script type="application/javascript">
+        /* Logic */
+        var yPos = 10;
+        var xPos = 10;
+        var skins = ['./../assets/images/hero/hero_b.gif', './../assets/images/hero/hero.gif', './../assets/images/hero/hero_r.gif', './../assets/images/hero/hero_l.gif']
+        var test = true;
+        var d = 0;
+        function getSkinner(d) {
+            return gifler(skins[d]);
         }
-        if (direction != 0) {
-            direction = 0;
+
+
+        document.addEventListener('keypress', function (event) {
+
+            this.test = false;
+            if (event.code == 'KeyS') {
+                moveDown();
+            }
+            else if (event.code == 'KeyW') {
+                moveUp();
+            }
+            else if (event.code == 'KeyA') {
+                moveLeft();
+            }
+            else if (event.code == 'KeyD') {
+                moveRight();
+            } else {
+            }
+        });
+        function firstSet() {
+            getSkinner(1).frames(canvas, onDrawFrame);
+
         }
-        yPos += 10;
-    }
-    function moveRight() {
-        if (xPos > 1800) {
-            return;
+        function moveUp() {
+            if (yPos < 0) {
+                return;
+            }
+            if (d != 1) {
+                d = 1;
+
+            }
+            yPos -= 10;
+
         }
-        if (direction != 2) {
-            direction = 2;
+
+        function moveDown() {
+            if (yPos > 800) {
+                return;
+            }
+            if (d != 0) {
+                d = 0;
+            }
+            yPos += 10;
         }
-        xPos += 10;
-    }
-    function moveLeft() {
-        if (xPos < 0) {
-            return;
+        function moveRight() {
+            if (xPos > 1800) {
+                return;
+            }
+            if (d != 2) {
+                d = 2;
+            }
+            xPos += 10;
         }
-        if (direction != 3) {
-            direction = 3;
+        function moveLeft() {
+            if (xPos < 0) {
+                return;
+            }
+            if (d != 3) {
+                d = 3;
+            }
+            xPos -= 10;
         }
-        xPos -= 10;
-    }
 
-    function draw() {
-        var canvas = document.getElementById('game');
-
-        if (canvas.getContext) {
-            var ctx = canvas.getContext('2d');
-            var bg = new Image();
-
-            var hero = new Image();
-            hero.addEventListener('load', function () {
-                ctx.drawImage(hero, xPos, yPos);
-            }, false);
-
-            bg.addEventListener('load', function () {
-                ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
-
-            }, false);
-            bg.src = './../assets/images/bg.png';
-            //  hero.src = skins[direction] + '.gif';
-            hero.src = './../assets/images/hero/hero.gif'
+        /*Render */
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+        var stage = new Konva.Stage({
+            container: 'hero',
+            width: width,
+            height: height
+        });
+        var layer = new Konva.Layer();
+        var layer2 = new Konva.Layer();
+        var imageObj = new Image();
+        imageObj.onload = function () {
+            var bg = new Konva.Image({
+                x: 0,
+                y: 0,
+                image: imageObj,
+                width: 1920,
+                height: 1080,
+            });
+            layer2.add(bg);
+        };
+        heroB = imageObj;
+        imageObj.src = './../assets/images/bg.png'
+        /* HERO */
+        var canvas = document.createElement('canvas');
+        function onDrawFrame(ctx, frame) {
+            canvas.width = 1920;
+            canvas.height = 1080;
+            ctx.drawImage(frame.buffer, xPos, yPos);
+            layer.draw();
         }
-        requestAnimationFrame(draw);
-
-    }
-
-</script>
-
-<body onload="draw();">
-    <div id="container"></div>
-    <canvas class="canva" id="game" width="1920" height="1080"></canvas>
+        var image = new Konva.Image({
+            image: canvas
+        });
+        layer.add(image);
+        stage.add(layer2);
+        stage.add(layer);
+        stage.draw();
+    </script>
 </body>
 
 </html>
-
-
-<script>
-    var width = window.innerWidth;
-    var height = window.innerHeight;
-    var stage = new Konva.Stage({
-        container: 'container',
-        width: width,
-        height: height
-    });
-    var layer = new Konva.Layer();
-    var circle = new Konva.Circle({
-        x: stage.width() / 2,
-        y: stage.height() / 2,
-        radius: 70,
-        fill: 'red',
-        stroke: 'black',
-        strokeWidth: 4
-    });
-    var canvas = document.createElement('canvas');
-    function onDrawFrame(ctx, frame) {
-        canvas.width = frame.width;
-        canvas.height = frame.height;
-        ctx.drawImage(frame.buffer, 0, 0);
-        layer.draw();
-    }
-
-    gifler('./../assets/images/hero/hero.gif').frames(canvas, onDrawFrame);
-    var image = new Konva.Image({
-        image: canvas
-    });
-    layer.add(circle);
-    layer.add(image);
-    stage.add(layer);
-
-</script>
