@@ -73,8 +73,8 @@
 
 
 
-        var presentOffsetX = 1580;
-        var presentOffsetY = 750;
+        var presentOffsetX = 1500;
+        var presentOffsetY = 680;
 
 
         function getHero() {
@@ -130,7 +130,7 @@
             }
         });
         function timer() {
-            var sec = 40;
+            var sec = 35;
             var timer = setInterval(function () {
                 document.getElementById('timer').innerHTML = '00:' + sec;
 
@@ -193,7 +193,7 @@
         function moveDown() {
             checkCollision()
 
-            if (yPos > 750) {
+            if (yPos > 710) {
                 return;
             }
             if (d != 0) {
@@ -207,7 +207,7 @@
         function moveRight() {
             checkCollision()
 
-            if (xPos > 1620) {
+            if (xPos > 1600) {
                 return;
             }
             if (d != 2) {
@@ -272,8 +272,8 @@
             var prdiv = document.createElement("div")
             prdiv.id = 'prdiv' + n
             prdiv.style.position = "absolute";
-            prdiv.style.left = randomFromInterval(1800, 0) + "px";
-            prdiv.style.top = randomFromInterval(800, 0) + "px";
+            prdiv.style.left = randomFromInterval(presentOffsetX, 0) + "px";
+            prdiv.style.top = randomFromInterval(presentOffsetY, 100) + "px";
             prdiv.style.width = "100px";
             prdiv.style.height = "100px";
             prdiv.style.color = "blue";
