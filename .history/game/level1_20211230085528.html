@@ -24,10 +24,10 @@
 
 
 <body onload="draw()">
-    <div class="canva" id="hero">
+    <div class="canva" id="bg" width="1920" height="1080">
 
     </div>
-    <canvas class="canva" id="game" width="1920" height="1080"></canvas>
+
 
 
 
@@ -35,50 +35,24 @@
         /* Logic */
         var yPos = 10;
         var xPos = 10;
-        var skins = ['./../assets/images/hero/hero.gif', './../assets/images/hero/hero_b.gif', './../assets/images/hero/hero_r.gif', './../assets/images/hero/hero_l.gif']
-        var skins_static = ['./../assets/images/hero/hero.png', './../assets/images/hero/hero_b.png', './../assets/images/hero/hero_r.png', './../assets/images/hero/hero_l.png']
-
+        var skins = ['./../assets/images/hero/hero_b.gif', './../assets/images/hero/hero.gif', './../assets/images/hero/hero_r.gif', './../assets/images/hero/hero_l.gif']
         var test = true;
-        var d = -1;
-        var herodiv = document.getElementById("hero");
+        var d = 0;
+        var bdiv = document.getElementById("bg");
+        bdiv.style.position = "absolute";
+        bdiv.style.left = "0px";
+        bdiv.style.top = "0px";
+        bdiv.style.width = "100px";
+        bdiv.style.height = "100px";
+        bdiv.style.background = "red";
+        bdiv.style.color = "blue";
+        document.addEventListener('keypress', function (event) {
 
-        herodiv.style.position = "absolute";
-        herodiv.style.left = "0px";
-        herodiv.style.top = "0px";
-        herodiv.style.width = "100px";
-        herodiv.style.height = "100px";
-        herodiv.style.color = "blue";
-        herodiv.style.zIndex = 3;
-
-        document.addEventListener('keyup', function (event) {
-            if (event.code == 'KeyW') {
-                getHero().src = skins_static[d];
-                d = -1;
-            }
+            this.test = false;
             if (event.code == 'KeyS') {
-                getHero().src = skins_static[d];
-                d = -1;
-
-            }
-            if (event.code == 'KeyA') {
-                getHero().src = skins_static[d];
-                d = -1;
-
-            }
-            if (event.code == 'KeyD') {
-                getHero().src = skins_static[d];
-                d = -1;
-
-            }
-        })
-
-        document.addEventListener('keydown', function (event) {
-            if (event.code == 'KeyS') {
-
                 moveDown();
             }
             else if (event.code == 'KeyW') {
-
                 moveUp();
             }
             else if (event.code == 'KeyA') {
@@ -87,28 +61,21 @@
             else if (event.code == 'KeyD') {
                 moveRight();
             } else {
-
             }
         });
 
-        function getHero() {
-            return document.getElementById("hero_img");
 
-        }
         function moveUp() {
-
             if (yPos < 0) {
                 return;
             }
             if (d != 1) {
                 d = 1;
 
-                getHero().src = skins[d];
-
-
             }
             yPos -= 10;
-            herodiv.style.top = yPos + "px";
+            bdiv.style.left = xPos + "px";
+
         }
 
         function moveDown() {
@@ -117,11 +84,9 @@
             }
             if (d != 0) {
                 d = 0;
-                getHero().src = skins[d];
-
             }
             yPos += 10;
-            herodiv.style.top = yPos + "px";
+            bdiv.style.left = xPos + "px";
         }
         function moveRight() {
             if (xPos > 1800) {
@@ -129,56 +94,37 @@
             }
             if (d != 2) {
                 d = 2;
-                getHero().src = skins[d];
             }
             xPos += 10;
-            herodiv.style.left = xPos + "px";
+            bdiv.style.left = xPos + "px";
         }
         function moveLeft() {
             if (xPos < 0) {
                 return;
             }
             if (d != 3) {
-                getHero().src = skins[d];
                 d = 3;
             }
             xPos -= 10;
-            herodiv.style.left = xPos + "px";
+            bdiv.style.left = xPos + "px";
         }
-
-        function draw() {
-            var canvas = document.getElementById('game');
-
-            if (canvas.getContext) {
-                var ctx = canvas.getContext('2d');
-                var bg = new Image();
-
-                var hero = new Image();
-                hero.addEventListener('load', function () {
-                    ctx.drawImage(hero, xPos, yPos);
-                }, false);
-
-                bg.addEventListener('load', function () {
-                    ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
-
-                }, false);
-                bg.src = './../assets/images/bg.png';
-            }
-            requestAnimationFrame(draw);
-
-        }
-
-
         var hero = new Image();
-        hero.src = skins_static[0];
-        hero.id = "hero_img"
+        var bg = new Image();
+
+        hero.src =
+            "./../assets/images/hero/hero_b.gif";
         hero.crossOrigin = "";
+        bg.src = "./../assets/images/bg.png";
+        bg.crossOrigin = "";
         function loaded() {
-            document.getElementById("hero").appendChild(hero);
+            document.getElementById("bg").appendChild(hero);
         }
+        function loadedBg() {
+            document.getElementById("bg").appendChild(bg);
 
+        }
         hero.onload = loaded;
-
+        bg.onload = loadedBg;
 
 
     </script>

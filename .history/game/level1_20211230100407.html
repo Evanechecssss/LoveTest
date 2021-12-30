@@ -36,10 +36,10 @@
         var yPos = 10;
         var xPos = 10;
         var skins = ['./../assets/images/hero/hero.gif', './../assets/images/hero/hero_b.gif', './../assets/images/hero/hero_r.gif', './../assets/images/hero/hero_l.gif']
-        var skins_static = ['./../assets/images/hero/hero.png', './../assets/images/hero/hero_b.png', './../assets/images/hero/hero_r.png', './../assets/images/hero/hero_l.png']
+        var skins = ['./../assets/images/hero/hero.gif', './../assets/images/hero/hero_b.gif', './../assets/images/hero/hero_r.gif', './../assets/images/hero/hero_l.gif']
 
         var test = true;
-        var d = -1;
+        var d = 0;
         var herodiv = document.getElementById("hero");
 
         herodiv.style.position = "absolute";
@@ -50,35 +50,13 @@
         herodiv.style.color = "blue";
         herodiv.style.zIndex = 3;
 
-        document.addEventListener('keyup', function (event) {
-            if (event.code == 'KeyW') {
-                getHero().src = skins_static[d];
-                d = -1;
-            }
+        document.addEventListener('keypress', function (event) {
+
+            this.test = false;
             if (event.code == 'KeyS') {
-                getHero().src = skins_static[d];
-                d = -1;
-
-            }
-            if (event.code == 'KeyA') {
-                getHero().src = skins_static[d];
-                d = -1;
-
-            }
-            if (event.code == 'KeyD') {
-                getHero().src = skins_static[d];
-                d = -1;
-
-            }
-        })
-
-        document.addEventListener('keydown', function (event) {
-            if (event.code == 'KeyS') {
-
                 moveDown();
             }
             else if (event.code == 'KeyW') {
-
                 moveUp();
             }
             else if (event.code == 'KeyA') {
@@ -87,7 +65,6 @@
             else if (event.code == 'KeyD') {
                 moveRight();
             } else {
-
             }
         });
 
@@ -96,15 +73,12 @@
 
         }
         function moveUp() {
-
             if (yPos < 0) {
                 return;
             }
             if (d != 1) {
                 d = 1;
-
                 getHero().src = skins[d];
-
 
             }
             yPos -= 10;
@@ -129,7 +103,6 @@
             }
             if (d != 2) {
                 d = 2;
-                getHero().src = skins[d];
             }
             xPos += 10;
             herodiv.style.left = xPos + "px";
@@ -139,7 +112,6 @@
                 return;
             }
             if (d != 3) {
-                getHero().src = skins[d];
                 d = 3;
             }
             xPos -= 10;
@@ -170,7 +142,7 @@
 
 
         var hero = new Image();
-        hero.src = skins_static[0];
+        hero.src = skins[d];
         hero.id = "hero_img"
         hero.crossOrigin = "";
         function loaded() {

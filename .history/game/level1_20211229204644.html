@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru" dir="auto" prefix="og: http://ogp.me/ns#">
+
+<head>
+    <meta charset="utf-8">
+    <script src="https://unpkg.com/konva@8.3.1/konva.min.js"></script>
+    <script src="https://unpkg.com/gifler@0.1.0/gifler.min.js"></script>
+    <title>Oshi game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <meta property="og:title" content="Окно игры" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://evanechecssss.github.io/LoveTest/game/level1.html" />
+    <meta property="og:image" content="https://evanechecssss.github.io/assets/images/banner_logo.png" />
+    <meta property="og:site_name" content="Oshi game" />
+    <link rel="icon" href="./../assets/images/icon.png" type="image/png">
+    <link rel="stylesheet" href="./../assets/css/game.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+
+
+<body onload="firstSet()">
+    <div id="hero"></div>
+    <div id="bg"></div>
+
+
+
+    <script type="application/javascript">
+        /* Logic */
+        var yPos = 10;
+        var xPos = 10;
+        var skins = ['./../assets/images/hero/hero_b.gif', './../assets/images/hero/hero.gif', './../assets/images/hero/hero_r.gif', './../assets/images/hero/hero_l.gif']
+        var test = true;
+        var d = 0;
+        function getSkinner(d) {
+            return gifler(skins[d]);
+        }
+
+
+        document.addEventListener('keypress', function (event) {
+
+            this.test = false;
+            if (event.code == 'KeyS') {
+                moveDown();
+            }
+            else if (event.code == 'KeyW') {
+                moveUp();
+            }
+            else if (event.code == 'KeyA') {
+                moveLeft();
+            }
+            else if (event.code == 'KeyD') {
+                moveRight();
+            } else {
+            }
+        });
+        function firstSet() {
+            getSkinner(1).frames(canvas, onDrawFrame);
+
+        }
+        function moveUp() {
+            if (yPos < 0) {
+                return;
+            }
+            if (d != 1) {
+                d = 1;
+
+            }
+            yPos -= 10;
+
+        }
+
+        function moveDown() {
+            if (yPos > 800) {
+                return;
+            }
+            if (d != 0) {
+                d = 0;
+            }
+            yPos += 10;
+        }
+        function moveRight() {
+            if (xPos > 1800) {
+                return;
+            }
+            if (d != 2) {
+                d = 2;
+            }
+            xPos += 10;
+        }
+        function moveLeft() {
+            if (xPos < 0) {
+                return;
+            }
+            if (d != 3) {
+                d = 3;
+            }
+            xPos -= 10;
+        }
+
+        /*Render */
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+        var stage = new Konva.Stage({
+            container: 'hero',
+            width: width,
+            height: height
+        });
+        var layer = new Konva.Layer();
+        var layer2 = new Konva.Layer();
+        var imageObj = new Image();
+        imageObj.onload = function () {
+            var bg = new Konva.Image({
+                x: 0,
+                y: 0,
+                image: imageObj,
+                width: 1920,
+                height: 1080,
+            });
+            layer2.add(bg);
+        };
+        heroB = imageObj;
+        imageObj.src = './../assets/images/bg.png'
+        /* HERO */
+        var canvas = document.createElement('canvas');
+        function onDrawFrame(ctx, frame) {
+            canvas.width = 1920;
+            canvas.height = 1080;
+            ctx.drawImage(frame.buffer, xPos, yPos);
+            layer.draw();
+        }
+        var image = new Konva.Image({
+            image: canvas
+        });
+        layer.add(image);
+        stage.add(layer2);
+        stage.add(layer);
+        stage.draw();
+    </script>
+</body>
+
+</html>

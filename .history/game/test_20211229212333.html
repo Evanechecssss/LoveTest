@@ -1,0 +1,13 @@
+var image = new Image();
+
+image.src =
+"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Rotating_earth_%28large%29.gif/200px-Rotating_earth_%28large%29.gif";
+image.crossOrigin = "";
+
+function loaded()
+{
+console.log(image.width);
+document.body.appendChild(image);
+}
+
+image.onload = loaded;
