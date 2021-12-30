@@ -30,6 +30,9 @@
 
 
 <body>
+
+
+
     <div class="intro">
 
         <div class="container">
@@ -55,6 +58,7 @@
         var skins = ['./../assets/images/hero/hero.gif', './../assets/images/hero/hero_b.gif', './../assets/images/hero/hero_r.gif', './../assets/images/hero/hero_l.gif']
         var skins_static = ['./../assets/images/hero/hero.png', './../assets/images/hero/hero_b.png', './../assets/images/hero/hero_r.png', './../assets/images/hero/hero_l.png']
         var skin_presents = ['./../assets/images/presents/p1.png', './../assets/images/presents/p2.png', './../assets/images/presents/p3.png', './../assets/images/presents/p4.png']
+        var skin_background = ['/../assets/images/backgrounds/bg.png', '/../assets/images/backgrounds/bg1.png', '/../assets/images/backgrounds/bg2.png', '/../assets/images/backgrounds/bg3.png']
         var presents = [];
         var d = -1;
         var goal = 20;
@@ -257,7 +261,9 @@
                     ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
 
                 }, false);
-                bg.src = './../assets/images/bg.png';
+
+
+                bg.src = skin_background[randomFromInterval(skin_background.length, 0)];
 
                 requestAnimationFrame(draw);
 
