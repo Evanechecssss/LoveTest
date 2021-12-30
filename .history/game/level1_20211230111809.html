@@ -53,6 +53,7 @@
         var herodiv = document.getElementById("hero");
         var presentOffsetX = 1800;
         var presentOffsetY = 800;
+        var presentAmount = 15;
         herodiv.style.position = "absolute";
         herodiv.style.left = "0px";
         herodiv.style.top = "0px";
@@ -171,7 +172,7 @@
         var score = 0;
         /* RENDER */
 
-        for (var i = 0; i < 8; i++) {
+        for (var i = 0; i < presentAmount; i++) {
             if (randomFromInterval(10, 0) > 6) {
                 presents.push({
                     x: randomFromInterval(presentOffsetX, 0),

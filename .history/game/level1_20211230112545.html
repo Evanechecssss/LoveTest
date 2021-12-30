@@ -53,6 +53,7 @@
         var herodiv = document.getElementById("hero");
         var presentOffsetX = 1800;
         var presentOffsetY = 800;
+        var presentAmount = 15;
         herodiv.style.position = "absolute";
         herodiv.style.left = "0px";
         herodiv.style.top = "0px";
@@ -171,7 +172,7 @@
         var score = 0;
         /* RENDER */
 
-        for (var i = 0; i < 8; i++) {
+        for (var i = 0; i < presentAmount; i++) {
             if (randomFromInterval(10, 0) > 6) {
                 presents.push({
                     x: randomFromInterval(presentOffsetX, 0),
@@ -212,7 +213,15 @@
 
                     pI.forEach((element, index, array) => {
                         element.addEventListener('load', function () {
-                            ctx.drawImage(element, presents[index].x, presents[index].y, 64, 64);
+
+                            if (xPos + hero.width >= hero[index].x) {
+
+                                score++;
+                                presents.splice(0, index)
+                                array.splice(0, index)
+                            } else {
+                                ctx.drawImage(element, presents[index].x, presents[index].y, 64, 64);
+                            }
                         }, false);
                     })
                     if (presents[i].color == -1) {

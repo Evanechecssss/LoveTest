@@ -53,6 +53,7 @@
         var herodiv = document.getElementById("hero");
         var presentOffsetX = 1800;
         var presentOffsetY = 800;
+        var presentAmount = 15;
         herodiv.style.position = "absolute";
         herodiv.style.left = "0px";
         herodiv.style.top = "0px";
@@ -67,6 +68,14 @@
         }
         function randomFromInterval(max, min) {
             return Math.floor(Math.random() * max) + min
+        }
+        function isCollide(a, b) {
+            return !(
+                ((a.y + 60) < (b.y)) ||
+                (a.y > (b.y + 60)) ||
+                ((a.x + 60) < b.x) ||
+                (a.x > (b.x + 60))
+            );
         }
         /* HANDLERS */
         document.addEventListener('keyup', function (event) {
@@ -171,7 +180,7 @@
         var score = 0;
         /* RENDER */
 
-        for (var i = 0; i < 8; i++) {
+        for (var i = 0; i < presentAmount; i++) {
             if (randomFromInterval(10, 0) > 6) {
                 presents.push({
                     x: randomFromInterval(presentOffsetX, 0),
@@ -188,6 +197,7 @@
 
             }
         }
+
         function draw() {
             var canvas = document.getElementById('game');
 
@@ -204,30 +214,33 @@
                 }, false);
                 bg.src = './../assets/images/bg.png';
 
-                var pI = [];
-                for (var i = 0; i < presents.length; i++) {
-                    var p1 = new Image();
-                    pI.push(p1)
 
-
-                    pI.forEach((element, index, array) => {
-                        element.addEventListener('load', function () {
-                            ctx.drawImage(element, presents[index].x, presents[index].y, 64, 64);
-                        }, false);
-                    })
-                    if (presents[i].color == -1) {
-                        p1.src = skin_presents[randomFromInterval(skin_presents.length, 0)];
-
-                    } else {
-                        p1.src = skin_presents[presents[i].color];
-
-                    }
-                }
 
                 requestAnimationFrame(draw);
 
             }
 
+
+
+        }
+
+        for (var i = 0; i < presents.length; i++) {
+            var p1 = new Image();
+            if (presents[i].color == -1) {
+                p1.src = skin_presents[randomFromInterval(skin_presents.length, 0)];
+
+            } else {
+                p1.src = skin_presents[presents[i].color];
+
+            }
+            p1.id = "hero_img"
+            p1.crossOrigin = "";
+
+            function loaded() {
+                document.getElementById("hero").appendChild(p1);
+            }
+
+            p1.onload = loaded;
         }
 
         var hero = new Image();

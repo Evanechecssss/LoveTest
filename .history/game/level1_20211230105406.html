@@ -51,8 +51,8 @@
         var presents = [];
         var d = -1;
         var herodiv = document.getElementById("hero");
-        var presentOffsetX = 1800;
-        var presentOffsetY = 800;
+        var presentOffsetX = 10;
+        var presentOffsetY = 10;
         herodiv.style.position = "absolute";
         herodiv.style.left = "0px";
         herodiv.style.top = "0px";
@@ -170,24 +170,13 @@
 
         var score = 0;
         /* RENDER */
-
-        for (var i = 0; i < 8; i++) {
-            if (randomFromInterval(10, 0) > 6) {
-                presents.push({
-                    x: randomFromInterval(presentOffsetX, 0),
-                    y: randomFromInterval(presentOffsetY, 0),
-                    color: -1
-                })
-            } else {
-
-                presents.push({
-                    x: randomFromInterval(presentOffsetX, 0),
-                    y: randomFromInterval(presentOffsetY, 0),
-                    color: randomFromInterval(skin_presents.length, 0)
-                })
-
-            }
+        for (var i = 0; i < 10; i++) {
+            presents[i] = {
+                x: randomFromInterval(presentOffsetX, -presentOffsetX) * 10 * i,
+                y: randomFromInterval(presentOffsetX, -presentOffsetX) * 10 * i
+            };
         }
+
         function draw() {
             var canvas = document.getElementById('game');
 
@@ -204,26 +193,15 @@
                 }, false);
                 bg.src = './../assets/images/bg.png';
 
-                var pI = [];
                 for (var i = 0; i < presents.length; i++) {
-                    var p1 = new Image();
-                    pI.push(p1)
+                    var pI = new Image();
+                    pI.addEventListener('load', function () {
 
+                        ctx.drawImage(pI, pI.x, pI.y, 64, 64);
 
-                    pI.forEach((element, index, array) => {
-                        element.addEventListener('load', function () {
-                            ctx.drawImage(element, presents[index].x, presents[index].y, 64, 64);
-                        }, false);
-                    })
-                    if (presents[i].color == -1) {
-                        p1.src = skin_presents[randomFromInterval(skin_presents.length, 0)];
-
-                    } else {
-                        p1.src = skin_presents[presents[i].color];
-
-                    }
+                    }, false);
+                    pI.src = skin_presents[0];
                 }
-
                 requestAnimationFrame(draw);
 
             }

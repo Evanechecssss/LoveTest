@@ -53,6 +53,7 @@
         var herodiv = document.getElementById("hero");
         var presentOffsetX = 1800;
         var presentOffsetY = 800;
+        var presentAmount = 15;
         herodiv.style.position = "absolute";
         herodiv.style.left = "0px";
         herodiv.style.top = "0px";
@@ -171,7 +172,7 @@
         var score = 0;
         /* RENDER */
 
-        for (var i = 0; i < 8; i++) {
+        for (var i = 0; i < presentAmount; i++) {
             if (randomFromInterval(10, 0) > 6) {
                 presents.push({
                     x: randomFromInterval(presentOffsetX, 0),
@@ -188,6 +189,21 @@
 
             }
         }
+
+        function MacroCollision(obj1, obj2) {
+            var XColl = false;
+            var YColl = false;
+
+            if ((obj1.x + obj1.width >= obj2.x) && (obj1.x <= obj2.x + obj2.width)) { XColl = true };
+            if ((obj1.y + obj1.height >= obj2.y) && (obj1.y <= obj2.y + obj2.height)) { YColl = true };
+
+            if (XColl && YColl) {
+                return true;
+            }
+            return false;
+        }
+
+        alert(MacroCollision(a, b));
         function draw() {
             var canvas = document.getElementById('game');
 
@@ -212,21 +228,37 @@
 
                     pI.forEach((element, index, array) => {
                         element.addEventListener('load', function () {
+
                             ctx.drawImage(element, presents[index].x, presents[index].y, 64, 64);
+                        }
                         }, false);
-                    })
-                    if (presents[i].color == -1) {
-                        p1.src = skin_presents[randomFromInterval(skin_presents.length, 0)];
+                })
 
-                    } else {
-                        p1.src = skin_presents[presents[i].color];
+                var a = {
+                    x: 10,
+                    y: 15,
+                    width: 50,
+                    height: 50
 
-                    }
                 }
+                var b = {
+                    x: xPos,
+                    y: yPos,
+                    width: 50,
+                    height: 50
+                }
+                if (presents[i].color == -1) {
+                    p1.src = skin_presents[randomFromInterval(skin_presents.length, 0)];
 
-                requestAnimationFrame(draw);
+                } else {
+                    p1.src = skin_presents[presents[i].color];
 
+                }
             }
+
+            requestAnimationFrame(draw);
+
+        }
 
         }
 

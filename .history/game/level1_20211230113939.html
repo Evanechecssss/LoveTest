@@ -53,6 +53,7 @@
         var herodiv = document.getElementById("hero");
         var presentOffsetX = 1800;
         var presentOffsetY = 800;
+        var presentAmount = 15;
         herodiv.style.position = "absolute";
         herodiv.style.left = "0px";
         herodiv.style.top = "0px";
@@ -67,6 +68,14 @@
         }
         function randomFromInterval(max, min) {
             return Math.floor(Math.random() * max) + min
+        }
+        function isCollide(a, b) {
+            return !(
+                ((a.y + 60) < (b.y)) ||
+                (a.y > (b.y + 60)) ||
+                ((a.x + 60) < b.x) ||
+                (a.x > (b.x + 60))
+            );
         }
         /* HANDLERS */
         document.addEventListener('keyup', function (event) {
@@ -171,7 +180,7 @@
         var score = 0;
         /* RENDER */
 
-        for (var i = 0; i < 8; i++) {
+        for (var i = 0; i < presentAmount; i++) {
             if (randomFromInterval(10, 0) > 6) {
                 presents.push({
                     x: randomFromInterval(presentOffsetX, 0),
@@ -188,6 +197,7 @@
 
             }
         }
+
         function draw() {
             var canvas = document.getElementById('game');
 
@@ -212,6 +222,7 @@
 
                     pI.forEach((element, index, array) => {
                         element.addEventListener('load', function () {
+
                             ctx.drawImage(element, presents[index].x, presents[index].y, 64, 64);
                         }, false);
                     })
@@ -222,11 +233,21 @@
                         p1.src = skin_presents[presents[i].color];
 
                     }
+
+                    if (isCollide({
+                        x: xPos,
+                        y: yPos
+                    }, presents[i])) {
+                        presents.shift(0, i);
+                    }
+
                 }
 
                 requestAnimationFrame(draw);
 
             }
+
+
 
         }
 

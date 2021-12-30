@@ -53,6 +53,7 @@
         var herodiv = document.getElementById("hero");
         var presentOffsetX = 1800;
         var presentOffsetY = 800;
+        var presentAmount = 15;
         herodiv.style.position = "absolute";
         herodiv.style.left = "0px";
         herodiv.style.top = "0px";
@@ -171,7 +172,7 @@
         var score = 0;
         /* RENDER */
 
-        for (var i = 0; i < 8; i++) {
+        for (var i = 0; i < presentAmount; i++) {
             if (randomFromInterval(10, 0) > 6) {
                 presents.push({
                     x: randomFromInterval(presentOffsetX, 0),
@@ -187,6 +188,32 @@
                 })
 
             }
+        }
+        var a = {
+            x: presents[i].x,
+            y: presents[i].y,
+            width: 50,
+            height: 50
+
+        }
+        var b = {
+            x: xPos,
+            y: yPos,
+            width: 50,
+            height: 50
+        }
+        alert(MacroCollision(a, b));
+        function MacroCollision(obj1, obj2) {
+            var XColl = false;
+            var YColl = false;
+
+            if ((obj1.x + obj1.width >= obj2.x) && (obj1.x <= obj2.x + obj2.width)) { XColl = true };
+            if ((obj1.y + obj1.height >= obj2.y) && (obj1.y <= obj2.y + obj2.height)) { YColl = true };
+
+            if (XColl & YColl) {
+                return true;
+            }
+            return false;
         }
         function draw() {
             var canvas = document.getElementById('game');
@@ -212,7 +239,15 @@
 
                     pI.forEach((element, index, array) => {
                         element.addEventListener('load', function () {
-                            ctx.drawImage(element, presents[index].x, presents[index].y, 64, 64);
+
+                            if (true) {
+
+                                score++;
+                                presents.splice(0, index)
+                                array.splice(0, index)
+                            } else {
+                                ctx.drawImage(element, presents[index].x, presents[index].y, 64, 64);
+                            }
                         }, false);
                     })
                     if (presents[i].color == -1) {
