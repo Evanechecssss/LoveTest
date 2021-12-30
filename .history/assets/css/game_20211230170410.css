@@ -1,0 +1,115 @@
+/* BASE */
+html {
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    font-family: 'Merriweather', serif;
+    background: rgb(218, 172, 172);
+    font-size: 14pt;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /*  overflow: hidden;*/
+}
+
+.main {
+    width: 100%;
+    height: 100vh;
+}
+
+a {
+    text-decoration: none;
+    color: #D9CFCD;
+}
+
+ul {
+    list-style: none;
+}
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+
+*::selection {
+    color: #c96d6d;
+}
+
+.main {
+    color: #c45656;
+}
+
+
+/* GAME */
+.intro {
+    position: relative;
+    text-align: center;
+    top: 100px;
+}
+
+.bg {
+    position: relative;
+
+    min-width: 100;
+    min-height: 100;
+    width: 100vh;
+    height: 100vw;
+}
+
+.container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+
+}
+
+.canva {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    font-weight: 700;
+}
+
+.timer {
+    color: #c96d6d;
+
+    position: absolute;
+    margin-top: 180px;
+    font-size: 40px;
+    font-weight: 700;
+    text-align: center;
+    font-family: 'Merriweather', serif;
+
+    text-transform: uppercase;
+    line-height: 1.1;
+    z-index: 200;
+
+}
+
+.goal {
+    color: #c96d6d;
+
+    position: absolute;
+    margin-top: 180px;
+    font-size: 40px;
+    font-weight: 700;
+    font-family: 'Merriweather', serif;
+
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 1.1;
+    z-index: 200;
+
+}
