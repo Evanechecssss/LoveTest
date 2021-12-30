@@ -73,7 +73,7 @@
 
 
         var arrayDivs = []
-
+        var ownBackGround;
 
 
 
@@ -111,6 +111,7 @@
             }
         })
         window.onload = function () {
+            ownBackGround = skin_background[randomFromInterval(skin_background.length, 0)]
             timer();
             draw()
         };
@@ -263,7 +264,7 @@
                 }, false);
 
 
-                bg.src = skin_background[randomFromInterval(skin_background.length, 0)];
+                bg.src = ownBackGround;
 
                 requestAnimationFrame(draw);
 
